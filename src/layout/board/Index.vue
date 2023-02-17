@@ -51,8 +51,8 @@
     computed: {
       viewStyle() {
         return {
-          width: `${this.$store.state.components.page.width}px`,
-          height: `${this.$store.state.components.page.height}px`
+          width: `${this.$store.state.components.page.width/2}px`,
+          height: `${this.$store.state.components.page.height/2}px`
         }
       },
       viewWrapStyle() {

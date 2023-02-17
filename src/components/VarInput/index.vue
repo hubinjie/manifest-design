@@ -4,7 +4,6 @@
     <div>
       <el-tooltip effect="dark" placement="bottom-start" :open-delay="300">
         <div class="w-200p" style="line-height: 20px;" slot="content">输入框中输入'${key}其中key为变量的Key'，所有${key}的字段都将被认定为变量字符串，调用vue打印模板的print方法传入对应的变量属性Key与值即可</div>
-        <span class="fs-12 link-info">如何设置变量<i class="fs-14 el-icon-magic-stick"></i></span>
       </el-tooltip>
     </div>
   </div>

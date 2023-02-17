@@ -27,36 +27,31 @@
     data() {
       return {
         form: {
-          width: 0,
-          height: 0,
-          pageName: 'a3',
-          defaultPage: 'a3'
+          width: 1000,
+          height: 700,
+          pageName: 'sj01',
+          defaultPage: 'sj01'
         },
         pageSizeOptions: [
           {
-            label: 'MY VIP（292px X 593px）',
-            value: 'my',
-            size: [292, 593]
+            label: '100mm X 70mm',
+            value: 'sj01',
+            size: [1000, 700]
           },
           {
-            label: 'A3（297mm X 420mm）',
-            value: 'a3',
-            size: [500, 500]
+            label: '70mm X 40mm',
+            value: 'sj02',
+            size: [700, 400]
           },
           {
-            label: 'A4（210mm X 297mm）',
-            value: 'a4',
-            size: [600, 600]
+            label: '60mm X 40mm',
+            value: 'sj03',
+            size: [600, 400]
           },
           {
-            label: 'A5（148mm X 210mm）',
-            value: 'a5',
-            size: [800, 800]
-          },
-          {
-            label: 'Custom（58mm X 40mm）',
-            value: 'custom-hsb',
-            size: [580, 400]
+            label: '100mm X 150mm',
+            value: 'sj04',
+            size: [1000, 1500]
           }
         ]
       };

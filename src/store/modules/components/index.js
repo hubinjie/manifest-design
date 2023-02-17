@@ -2421,6 +2421,38 @@ const components = {
                     borderStyle: 'solid'
                 }
             },
+            receiverName: {
+                name: 'receiverName',
+                type: 'ReceiverName', //这里是展示区配置
+                classify: 'TextReadonlyMenu', //这里为菜单区配置
+                title: '收件人姓名', //栏目名称
+                updateId: '',
+                instance: false,
+                tag: 'div',
+                position: {
+                    clientX: '',
+                    clientY: '',
+                },
+                default: {
+                    width: '100',
+                    height: '30',
+                    x: '',
+                    y: '',
+                },
+                variable: {
+                    enable: false,
+                    textData: []
+                },
+                props: {
+                    align: 'left',
+                    fontFamily: '',
+                    lineHeight: '',
+                    fontSize: '',
+                    isBold: false,
+                    hasBorder: false,
+                    text: 'Alex hu',
+                }
+            },
             senderAddress: {
                 name: 'senderAddress',
                 type: 'TextUi',
@@ -2428,7 +2460,7 @@ const components = {
                 title: '寄件人地址',
                 updateId: '',
                 instance: false,
-                tag: 'span',
+                tag: 'div',
                 position: {
                     clientX: '',
                     clientY: '',
@@ -2444,7 +2476,7 @@ const components = {
                     textData: []
                 },
                 props: {
-                    text: '寄件人地址',
+                    text: '',
                     align: 'left',
                     fontFamily: '',
                     lineHeight: '',
@@ -2454,9 +2486,9 @@ const components = {
                 }
             },
             receiverAddress: {
-                type: 'TextUi',
+                type: 'ReceiverAddress',
                 name: 'receiverAddress',
-                classify: 'TextMenu',
+                classify: 'ReceiverAddressMenu',
                 title: '收件人地址',
                 instance: false,
                 tag: 'span',
@@ -2476,7 +2508,7 @@ const components = {
                     y: '',
                 },
                 props: {
-                    text: '收件人地址',
+                    text: 'Room 303B, Jiangnan Times Building, Longgang District, Shenzhen, China, 518000',
                     align: 'left',
                     fontFamily: '',
                     lineHeight: '',
@@ -2656,6 +2688,14 @@ const components = {
             {
                 title: '地址信息',
                 list: [
+                    {
+                        title: '收件人姓名',
+                        icon: 'iconfont iconziti1',
+                        id: 'receiverName',
+                        component: {
+                            type: 'ReceiverName',
+                        },
+                    },
                     {
                         title: '收件人地址',
                         icon: 'iconfont iconziti1',

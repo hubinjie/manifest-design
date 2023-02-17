@@ -12,10 +12,14 @@ import {
   LineMenu,
   RectangleUi,
   RectangleMenu,
+  ReceiverAddress,
+  ReceiverAddressMenu,
   TableMenu,
   VarText,
   VarInput,
   TableUi,
+  ReceiverName,
+  TextReadonlyMenu,
 } from './index';
 
 export default [
@@ -68,6 +72,14 @@ export default [
     component: RectangleUi,
   },
   {
+    id: 'ReceiverAddress',
+    component: ReceiverAddress,
+  },
+  {
+    id: 'ReceiverAddressMenu',
+    component: ReceiverAddressMenu,
+  },
+  {
     id: 'RectangleMenu',
     component: RectangleMenu,
   },
@@ -86,5 +98,13 @@ export default [
   {
     id: 'TableUi',
     component: TableUi
+  },
+  {
+    id: 'ReceiverName',
+    component: ReceiverName
+  },
+  {
+    id: 'TextReadonlyMenu',
+    component: TextReadonlyMenu
   }
 ]
