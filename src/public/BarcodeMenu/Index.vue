@@ -15,6 +15,9 @@
             <el-option v-for="item in selectOptions" :key="item.value" :value="item.value" :label="item.label" />
           </el-select>
         </el-form-item>
+        <el-form-item>
+            <el-button type="danger" @click="deletes">删除标签</el-button>
+        </el-form-item>
       </el-tab-pane>
       <el-tab-pane label="样式" name="style">
         <el-form-item label="线宽">
@@ -123,6 +126,9 @@
       handleUpdateBarcode() {
         this.$store.dispatch('components/updateBarcode');
       },
+      deletes(){
+        this.$store.dispatch('components/deleteComponent',this.currentComponent);
+      }
     },
   };
 </script>

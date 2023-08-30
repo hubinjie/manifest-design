@@ -5,8 +5,8 @@
       <el-tab-pane label="内容" name="content">
         <el-form ref="content-form">
         <el-form-item label="地址格式">
-          <el-select class="w-100" v-model="currentComponent.props.addressType" size="small">
-            <el-option v-for="item in addressStyleOptions" :key="item.value" :value="item.value" :label="item.label" />
+          <el-select class="w-100" v-model="currentComponent.props.addressType" @change="change" size="small">
+            <el-option v-for="item in addressStyleOptions"  :key="item.value" :value="item.value" :label="item.label" />
           </el-select>
         </el-form-item>
           <el-form-item label="对齐方式">
@@ -31,6 +31,9 @@
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="currentComponent.props.isBold">字体加粗</el-checkbox>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="danger" @click="deletes">删除标签</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -169,6 +172,12 @@
       init() {
         // doing
       },
+      change(value){//选择之后改变text 内容，
+        this.currentComponent.props.text=this.currentComponent.props.addressType=='ssqjm'?'中国广东省深圳市龙岗区江南时代大厦303B,518000':'Room 303B, Jiangnan Times Building, Longgang District, Shenzhen, China, 518000'
+      },
+      deletes(){
+        this.$store.dispatch('components/deleteComponent',this.currentComponent);
+      }
     },
   };
 </script>

@@ -10,6 +10,9 @@
             <el-option v-for="item in errorLevleOptions" :key="item.value" :value="item.value" :label="item.label" />
           </el-select>
         </el-form-item>
+        <el-form-item>
+            <el-button type="danger" @click="deletes">删除标签</el-button>
+        </el-form-item>
       </el-tab-pane>
       <el-tab-pane label="样式" name="style">
         <el-form-item label="边距">
@@ -67,6 +70,9 @@ export default {
     handleUpdateQrcode() {
       updateQrcode(this.currentComponent.id, this.currentComponent.props.data, this.currentComponent.props.options)
     },
+    deletes(){
+        this.$store.dispatch('components/deleteComponent',this.currentComponent);
+      }
   },
 };
 </script>

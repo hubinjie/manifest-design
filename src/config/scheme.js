@@ -14,6 +14,21 @@ export default {
             })
         ])
     },
+    qrlogo: (createElement, context) => {
+        return createElement('div', {
+            class: 'qr-code-warp',
+        }, [
+            createElement('img', {
+                class: ['qr-code', context.elementId],
+                ref: 'img',
+                attrs: {
+                    alt: 'qrcode',
+                    draggable: 'false',
+                    src: 'wqeqwewqe'
+                }
+            })
+        ])
+    },
     barcode: (createElement, context) => {
         let $varText = createElement('var-text', {
             class: 'barcode-text',

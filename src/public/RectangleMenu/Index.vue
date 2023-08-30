@@ -10,6 +10,9 @@
             <el-option v-for="item in lineOptions" :key="item.value" :value="item.value" :label="item.label" />
           </el-select>
         </el-form-item>
+        <el-form-item>
+            <el-button type="danger" @click="deletes">删除标签</el-button>
+        </el-form-item>
       </el-tab-pane>
     </el-tabs>
   </el-form>
@@ -47,6 +50,9 @@
       init() {
         // doing
       },
+      deletes(){
+        this.$store.dispatch('components/deleteComponent',this.currentComponent);
+      }
     },
   };
 </script>

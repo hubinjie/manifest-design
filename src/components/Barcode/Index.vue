@@ -64,7 +64,6 @@
       init() {
         this.complete();
         const { elementId, bodyHeight, lineWidth, format, data } = this;
-        console.log(format)
         barcode(`.${elementId}`, data, {
           format,
           width: lineWidth,

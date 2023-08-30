@@ -18,8 +18,11 @@
           <el-table-column label="类别" prop="classify" />
           <el-table-column label="操作">
             <template slot-scope="props">
-              <el-link type="primary" @click="handleGoDetail(props.row)">
+              <el-link type="primary" @click="handleGoDetail(props.row)" style="margin-right: 10px;">
                 <i class="el-icon-edit-outline fs-16" /> 修改
+              </el-link>
+              <el-link type="danger" @click="handleGoDetail(props.row)">
+                <i class="el-icon-delete fs-16" /> 删除
               </el-link>
             </template>
           </el-table-column>
@@ -61,6 +64,7 @@
     methods: {
       init() {
         this.$store.dispatch('components/clearStoreList');
+        console.log(this.templateList);
       },
       handleGoDetail(item) {
         this.$router.push({ name: 'Edit', query: { id: item.name } });

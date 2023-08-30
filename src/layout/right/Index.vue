@@ -1,6 +1,10 @@
 <template>
   <el-form class="props-menu-warp" :model="form" label-position="top" @click.stop>
-    <div class="title-area">{{ activeComponent.title || '模板设计' }}</div>
+    <!-- {{ '标签：'+activeComponent.title || '模板设计' }} -->
+    <div class="title-area">
+      <span v-if="activeComponent.title">标签：{{ activeComponent.title }}</span>
+      <span v-else>模板设计</span>
+    </div>
     <component ref="menu" :is="activeComponent.classify" :component="activeComponent" />
     <template v-if="!activeComponent">
       <el-form-item label="纸张尺寸">

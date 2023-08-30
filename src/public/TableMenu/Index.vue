@@ -8,6 +8,9 @@
             <el-input v-if="isAdd" v-model="value" ref="add" class="ml-15 w-100p" size="small" @keydown.native.enter.prevent />
             <el-button v-else class="ml-15" icon="el-icon-plus" size="small" @click="handleShowAdd">添加字段</el-button>
           </el-form-item>
+          <el-form-item>
+            <el-button type="danger" @click="deletes">删除标签</el-button>
+          </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="样式" name="style">
@@ -83,6 +86,9 @@ export default {
         this.$refs.add.focus()
       })
     },
+    deletes(){
+      this.$store.dispatch('components/deleteComponent',this.currentComponent);
+    }
   },
 };
 </script>
