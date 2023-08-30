@@ -26,6 +26,9 @@
           <el-form-item>
             <el-checkbox v-model="currentComponent.props.isBold">字体加粗</el-checkbox>
           </el-form-item>
+          <el-form-item>
+            <el-button type="danger" @click="deletes">删除标签</el-button>
+          </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="边框" name="board">
@@ -165,6 +168,9 @@
       init() {
         this.tab = 'content';
       },
+      deletes(){
+        this.$store.dispatch('components/deleteComponent',this.currentComponent);
+      }
     },
   };
 </script>

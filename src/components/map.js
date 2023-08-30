@@ -20,6 +20,13 @@ import {
   TableUi,
   ReceiverName,
   TextReadonlyMenu,
+  SenderNameMenu,
+  SenderName,
+  LoGo,
+  LoGoMenu,
+  SenderAddressMenu,
+  DateFormat,
+  DateFormatMenu
 } from './index';
 
 export default [
@@ -106,5 +113,33 @@ export default [
   {
     id: 'TextReadonlyMenu',
     component: TextReadonlyMenu
+  },
+  {
+    id: 'SenderName',
+    component: SenderName
+  },
+  {
+    id: 'SenderNameMenu',
+    component: SenderNameMenu
+  },
+  {
+    id:'LoGo',
+    component: LoGo
+  },
+  {
+    id:'LoGoMenu',
+    component: LoGoMenu
+  },
+  {
+    id:'SenderAddressMenu',
+    component: SenderAddressMenu
+  },
+  {
+    id:'DateFormat',
+    component: DateFormat
+  },
+  {
+    id:'DateFormatMenu',
+    component: DateFormatMenu
   }
 ]

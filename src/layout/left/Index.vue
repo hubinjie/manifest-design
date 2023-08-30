@@ -23,7 +23,7 @@
     },
     data() {
       return {
-        menu: ['地址信息', '商品标签信息', '构图元素'],
+        menu: ['地址信息', '构图元素'],
         board: {
           minLeft: '',
           maxLeft: '',

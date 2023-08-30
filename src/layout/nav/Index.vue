@@ -2,32 +2,23 @@
   <div>
     <div id="nav-warp">
       <div class="logo-area">
-        Design UI
+        模板设置
       </div>
       <div class="handle-area">
-        <div class="preview-btn" @click="handleGenerateFile">
+        <div class="preview-btn" @click="handleClearCanvas">
           <i class="el-icon-magic-stick"></i>
-          <span>生成vue模板组件</span>
+          <span>清空画布</span>
         </div>
-        <div class="preview-btn" @click="handleSaveTemplateToImg">
-          <i class="el-icon-picture-outline"></i>
-          <span>保存为图片</span>
+        <div class="preview-btn" @click="handleViewTemplate">
+          <i class="el-icon-reading"></i>
+          <span>预览</span>
         </div>
         <div class="preview-btn" @click="handleShowSaveDialog">
           <i class="el-icon-receiving"></i>
           <span>保存为模板</span>
         </div>
-        <div class="preview-btn" @click="handleViewTemplate">
-          <i class="el-icon-reading"></i>
-          <span>打印预览</span>
-        </div>
-        <div class="preview-btn" @click="handlePrint">
-          <i class="el-icon-printer"></i>
-          <span>快速打印</span>
-        </div>
-        <div class="preview-btn" @click="handleClearCanvas">
-          <i class="el-icon-magic-stick"></i>
-          <span>清空画布</span>
+        <div class="preview-btn" @click="back">
+          <span>返回</span>
         </div>
       </div>
     </div>
@@ -50,10 +41,16 @@
     data() {
       return {
         imgSrc: '',
+        prevHtml:''
       };
     },
     mounted() {
       //
+    },
+    computed:{
+        domes(){
+          return document.querySelector('.drag-canvas-warp').innerHTML
+        }
     },
     methods: {
       convertBase64UrlToBlob(urlData) {
@@ -120,6 +117,28 @@
         // console.log(JSON.parse(test))
         // this.$store.dispatch('components/updateStoreList', JSON.parse(test))
       },
+      back(){
+        const $board =  this.domes
+        this.prevHtml =  $board
+        setTimeout(() => {
+          const currentHtml = document.querySelector('.drag-canvas-warp').innerHTML
+          if (this.prevHtml !== currentHtml) {
+            this.$confirm('模板有更改，否需要保存?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning',
+            }).then(() => {
+             console.log(123456);
+            }).catch(()=>{
+              console.log(12346);
+            });
+          }else{
+            this.$router.push({
+             name:'List'
+            })
+          }
+        }, 100)
+      }
     },
   };
 </script>

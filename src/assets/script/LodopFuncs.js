@@ -46,18 +46,18 @@ function needCLodop() {
 
 //==加载引用CLodop的主JS,用双端口8000和18000(以防其中一个被占):==
 function loadCLodop() {
-    if (CLodopJsState == "loading" || CLodopJsState == "complete") return;
-    CLodopJsState = "loading";
-    var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
-    var JS1 = document.createElement("script");
-    var JS2 = document.createElement("script");
-    JS1.src = "http://localhost:8000/CLodopfuncs.js?priority=1";
-    JS2.src = "http://localhost:18000/CLodopfuncs.js";
-    JS1.onload  = JS2.onload  = function()    {CLodopJsState = "complete";}
-    JS1.onerror = JS2.onerror = function(evt) {CLodopJsState = "complete";}
-    head.insertBefore(JS1, head.firstChild);
-    head.insertBefore(JS2, head.firstChild);
-    CLodopIsLocal = !!((JS1.src + JS2.src).match(/\/\/localho|\/\/127.0.0./i));
+    // if (CLodopJsState == "loading" || CLodopJsState == "complete") return;
+    // CLodopJsState = "loading";
+    // var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
+    // var JS1 = document.createElement("script");
+    // var JS2 = document.createElement("script");
+    // JS1.src = "http://localhost:8000/CLodopfuncs.js?priority=1";
+    // JS2.src = "http://localhost:18000/CLodopfuncs.js";
+    // JS1.onload  = JS2.onload  = function()    {CLodopJsState = "complete";}
+    // JS1.onerror = JS2.onerror = function(evt) {CLodopJsState = "complete";}
+    // head.insertBefore(JS1, head.firstChild);
+    // head.insertBefore(JS2, head.firstChild);
+    // CLodopIsLocal = !!((JS1.src + JS2.src).match(/\/\/localho|\/\/127.0.0./i));
 }
 
 if (needCLodop()){loadCLodop();}//加载

@@ -1,6 +1,6 @@
 <template>
   <div :id="elementId" class="receiver-address-component">
-    <span class="detail" :style="getTextStyle">{{ getText }}</span>
+    <span class="detail" :style="getTextStyle">{{ text }}</span>
   </div>
 </template>
 
@@ -57,10 +57,6 @@
         };
         return style;
       },
-      getText() {
-        const { addressType } = this;
-        return addressType==='ssqjm'?'中国广东省深圳市龙岗区江南时代大厦303B,518000':'Room 303B, Jiangnan Times Building, Longgang District, Shenzhen, China, 518000'
-      }
     },
     mounted() {
       this.init();

@@ -1,9 +1,11 @@
 import barcode from 'jsbarcode'
 import Vue from 'vue'
+import axios from 'axios'
 import _ from 'lodash';
 import {generateLetterId} from 'letter-id'
 import {Notification} from 'element-ui'
 import {getStringVars} from '@/utils';
+import { Date } from 'core-js';
 
 const defaultTemplate = [
     {
@@ -2372,6 +2374,11 @@ const defaultTemplate = [
 
 
 const localTemplate = localStorage.getItem('templateList') || JSON.stringify(defaultTemplate)
+const DateFormat = new Date()
+const year = DateFormat.getFullYear();
+const month = DateFormat.getMonth() + 1; // 注意月份是从0开始计数的，需要加1
+const day = DateFormat.getDate();
+const dateStr = year + '年' + month.toString().padStart(2, '0') + '月' + day.toString().padStart(2, '0')
 const generateId = () => {
     return generateLetterId()
 }
@@ -2472,9 +2479,9 @@ const components = {
             },
             senderAddress: {
                 name: 'senderAddress',
-                type: 'TextUi',
-                classify: 'TextMenu',
-                title: '寄件人地址',
+                type: 'receiverAddress',
+                classify: 'SenderAddressMenu',
+                title: '发件人地址',
                 updateId: '',
                 instance: false,
                 tag: 'div',
@@ -2493,7 +2500,40 @@ const components = {
                     textData: []
                 },
                 props: {
-                    text: '',
+                    text: 'Room 303B, Jiangnan Times Building, Longgang District, Shenzhen, China, 518000',
+                    align: 'left',
+                    fontFamily: '',
+                    lineHeight: '',
+                    fontSize: '',
+                    isBold: false,
+                    hasBorder: false,
+                    addressType:'jmqss'
+                }
+            },
+            senderName: {
+                name: 'SenderName',
+                type: 'senderName',
+                classify: 'SenderNameMenu',
+                title: '发件人姓名',
+                updateId: '',
+                instance: false,
+                tag: 'div',
+                position: {
+                    clientX: '',
+                    clientY: '',
+                },
+                default: {
+                    width: '',
+                    height: '',
+                    x: '',
+                    y: '',
+                },
+                variable: {
+                    enable: false,
+                    textData: []
+                },
+                props: {
+                    text: '发件人姓名',
                     align: 'left',
                     fontFamily: '',
                     lineHeight: '',
@@ -2525,14 +2565,50 @@ const components = {
                     y: '',
                 },
                 props: {
-                    text: 'Room 303B, Jiangnan Times Building, Longgang District, Shenzhen, China, 518000',
+                    text: '中国广东省深圳市龙岗区江南时代大厦303B,518000',
                     align: 'left',
                     fontFamily: '',
                     lineHeight: '',
                     fontSize: '',
                     isBold: false,
                     hasBorder: false,
+                    addressType:'ssqjm'
                 },
+            },
+            DateFormat: {
+                name: 'DateFormat',
+                type: 'DateFormat',
+                classify: 'DateFormatMenu',
+                title: '日期',
+                updateId: '',
+                instance: false,
+                tag: 'div',
+                dateStr:dateStr,
+                year:year+'年',
+                position: {
+                    clientX: '',
+                    clientY: '',
+                },
+                default: {
+                    width: '',
+                    height: '',
+                    x: '',
+                    y: '',
+                },
+                variable: {
+                    enable: false,
+                    textData: []
+                },
+                props: {
+                    text: dateStr,
+                    align: 'left',
+                    fontFamily: '',
+                    lineHeight: '',
+                    fontSize: '',
+                    isBold: false,
+                    hasBorder: false,
+                    addressType:'ssqjm'
+                }
             },
             barcode: {
                 name: 'barCode',
@@ -2668,6 +2744,32 @@ const components = {
                     }
                 },
             },
+            LoGo: {
+                name: 'LoGo',
+                type: 'LoGo',
+                classify: 'LoGoMenu',
+                title: 'LoGo',
+                updateId: '',
+                tag: 'img',
+                instance: false,
+                position: {
+                    clientX: '',
+                    clientY: '',
+                },
+                variable: {
+                    enable: false,
+                    textData: []
+                },
+                default: {
+                    width: '',
+                    height: '',
+                    x: '',
+                    y: '',
+                },
+                props: {
+                    src: 'https://i.niupic.com/images/2023/02/20/akDK.jpg',//logo图片地址
+                },
+            },
             customText: {
                 name: 'customText',
                 type: 'TextUi',
@@ -2722,28 +2824,44 @@ const components = {
                         },
                     },
                     {
+                        title: '发件人姓名',
+                        id: 'senderName',
+                        icon: 'iconfont iconziti1',
+                        component: {
+                            type: 'senderName',
+                        },
+                    },
+                    {
                         title: '发件人地址',
                         id: 'senderAddress',
                         icon: 'iconfont iconziti1',
                         component: {
-                            type: 'TextUi',
+                            type: 'senderAddress',
+                        },
+                    },
+                    {
+                        title: '日期',
+                        icon: 'iconfont iconziti1',
+                        id: 'DateFormat',
+                        component: {
+                            type: 'DateFormat',
                         },
                     },
                 ],
             },
-            {
-                title: '商品标签信息',
-                list: [
-                    {
-                        title: '列表',
-                        id: 'table',
-                        icon: 'iconfont iconliebiao',
-                        component: {
-                            type: 'TableUi',
-                        },
-                    }
-                ],
-            },
+            // {
+            //     title: '商品标签信息',
+            //     list: [
+            //         {
+            //             title: '列表',
+            //             id: 'table',
+            //             icon: 'iconfont iconliebiao',
+            //             component: {
+            //                 type: 'TableUi',
+            //             },
+            //         }
+            //     ],
+            // },
             {
                 title: '构图元素',
                 list: [
@@ -2769,6 +2887,14 @@ const components = {
                         icon: 'iconfont iconqrcode',
                         component: {
                             type: 'QrCodeUi',
+                        },
+                    },
+                    {
+                        title: 'Logo',
+                        id: 'LoGo',
+                        icon: 'el-icon-picture-outline',
+                        component: {
+                            type: 'LogoUi',
                         },
                     },
                     {
@@ -2819,6 +2945,9 @@ const components = {
         setComponentVariable({commit}) {
             // const active = state.storeList.find((item: any) => item.id === state.activeComponent.id)
             commit('SET_COMPONENT_VARIABLE')
+        },
+        deleteComponent({commit},payload){
+            commit('DELETE_COMPONENT',payload)
         },
         updateValve({commit}, payload) {
             commit('UPDATE_VALVE', payload)
@@ -2918,6 +3047,14 @@ const components = {
         }
     },
     mutations: {
+        DELETE_COMPONENT(state,payload){//删除标签
+            state.storeList = state.storeList.filter(item=>item.id!=payload.id)
+            const $board = document.querySelector('.drag-canvas-warp.board-canvas');
+            const $list = $board && $board.querySelectorAll('.item');
+            if ($list && $list.length) $list.forEach((item) => {
+                $board.removeChild(item);//删除dom元素
+            });    
+        },
         ADD_TABLE_ROW(state) {
             console.log('')
         },
@@ -2968,7 +3105,23 @@ const components = {
             state.activeComponent = state.storeList.find((item) => item.id === id) || '';
         },
         SAVE_TEMPLATE(state, template) {
-            state.templateList.push(template);
+            console.log(template,'确认模板');
+            axios({
+                method: 'POST',
+                url: 'https://dev-api.haiouoms.com/api/admin/label-templates',
+                data: {
+                    type: 1,
+                    name: template.name,
+                    width: template.options.width,
+                    height: template.options.height,
+                    content:{
+                        customer_text:template.data
+                    }
+                }
+            }).then(res=>{
+                console.log(res);
+            });
+           // state.templateList.push(template);
         },
         HIDE_STORE_LOADING(state) {
             state.storeLoading = false

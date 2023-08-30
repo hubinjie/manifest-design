@@ -133,9 +133,11 @@ export default {
     getSelfStyle(component) {
       const style = {}
       const {props, type} = component
-      const {width, fontSize, align, borderWidth = '1', lineHeight, isBold, hasBorder, height, lineType = 'solid'} = props
+      const {width, fontSize, align, borderWidth = '1', lineHeight, isBold, hasBorder, height, lineType = 'solid',borderStyle} = props
       const isXLine = type === 'XLineUi'
-      const isYLine = type === 'YLineUi'
+      const isYLine = type === 'YLineUi'//竖线
+      const isLogo = type === 'LoGo'
+      const istable = type === 'TableUi'
       const isBarcode = type === 'BarcodeUi'
       const isText = type.includes('Text')
       const isRectangle = type === 'RectangleUi'
@@ -144,6 +146,7 @@ export default {
         style.borderTop = `${height}px`
         if (lineType === 'solid') {
           style.height = `${height}px`
+          style.borderTop = `${height}px ${lineType} #000`
           style.backgroundColor = '#000'
         } else if (lineType === 'dashed') {
           style.borderTop = `${height}px ${lineType} #000`
@@ -153,6 +156,7 @@ export default {
         style.minHeight = '100%'
         if (lineType === 'solid') {
           style.backgroundColor = '#000'
+          style.borderLeft = `${width}px ${lineType} #000`
         } else if (lineType === 'dashed') {
           style.borderLeft = `${width}px ${lineType} #000`
         }
@@ -166,6 +170,12 @@ export default {
         style.fontWeight = isBold ? 'bold' : '400'
       } else if (isRectangle) {
         style.border = `${borderWidth}px ${lineType} #000`
+      }else if (isLogo){
+        style.height = `100%`
+        style.width = `100%`
+      } else if (istable) {
+        style.height = `100%`
+        style.width = `100%`
       }
       return style
     },
@@ -191,6 +201,8 @@ export default {
         xLine: (create, instance) => this.renderHorizontalLine(create, instance),
         yLine: (create, instance) => this.renderVerticalLine(create, instance),
         rectangle: (create, instance) => this.renderRectangle(create, instance),
+        LoGo:(create, instance) => this.renderLoGo(create, instance),
+        table:(create, instance) => this.renderTable(create, instance),
       }[component.name]
       // console.log(component.name)
       const defaultRender = () => {
@@ -220,6 +232,51 @@ export default {
             renderMap ? renderMap(createElement, component) : defaultRender()
           ]
       )
+    },
+    renderTable(createElement, component){
+      let theads = Object.keys(component.props.tableData[0])
+       // 创建表格
+        return createElement('table', {
+          class:['vws-als-qnl', component.id],
+          style:this.getSelfStyle(component),
+          attrs:{
+            cellspacing:'0',
+            border:'1',
+            cellpadding:'0'
+          }
+        },[
+          // 创建表头 createElement('th', 'Name'),
+          createElement('thead', 
+            [
+              createElement('tr', 
+                theads.map(item=>createElement('th', item))
+              )
+            ]
+          ),
+          // 创建表格内容
+          createElement('tbody', [
+            createElement('tr', [
+              createElement('td', 'Alice'),
+              createElement('td', '25'),
+              createElement('td', '25')
+            ]),
+            createElement('tr', [
+              createElement('td', 'Bob'),
+              createElement('td', '30'),
+              createElement('td', '25')
+            ])
+          ])
+        ]);
+    },
+    renderLoGo(createElement, component){
+      return  createElement('img', { //创建图片
+          class: ['rlx-wbx-bqh', component.id],
+          ref: 'img',
+          style: this.getSelfStyle(component), //添加样式
+          attrs: {
+            src: component.props.src,//路径
+          }
+        })
     },
     renderQrcode(createElement, component) {
       return createElement('div', {

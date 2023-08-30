@@ -1,6 +1,6 @@
 <template>
   <div class="table-wrap">
-    <table class="w-100 table-wrap__table" border="1" cellspacing="1px" cellpadding="0">
+    <table class="w-100 table-wrap__table" style="height: 100%;" border="1" cellspacing="0" cellpadding="0">
       <thead>
         <tr>
           <th v-for="(item, key, index) in tableData[0]" :key="index">
@@ -92,6 +92,7 @@ export default {
 <style lang="scss">
 .table-wrap {
   width: 100%;
+  height: 100%;
   --table-border-color: transparent;
   position: relative;
 
